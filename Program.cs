@@ -6,7 +6,9 @@ namespace DoorOpenCloseApp
     {
         static void Main(string[] args)
         {
+            //new BarkSound("rowlf")
            DoorStimulator doorStimulator = new DoorStimulator();
+           
             doorStimulator.Run();
         }
     }

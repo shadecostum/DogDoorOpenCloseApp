@@ -11,26 +11,52 @@ namespace DoorOpenCloseApp.Models
 
         public bool Status;
 
+      // public BarkSound BarkSounds;
+        List<BarkSound> listSound { get; set; }
+     
+
         public DogDoor() 
         {
-           this.Status = false;
+            Status = false;
+            listSound = new List<BarkSound>();
         }
+
 
         public void DoorOpen()
         {
-            Console.WriteLine("Door Opened");
+          
             Status = true;
+            Timer timer = new Timer(_ =>
+            {
+                DoorClose();
+                Console.WriteLine("closed after 5 sec automatically");
+            }, null, 3000, Timeout.Infinite);
+
         }
 
         public void DoorClose()
         {
-            Console.WriteLine("Door Closed");
+           
             Status = false;
         }
 
         public bool IsDoorOpenClose()
         {
+          //  Console.WriteLine(Status);
             return Status;
+        }
+
+
+        public void AddBarkSound(BarkSound barkSound)
+        {
+          // BarkSounds = barkSound;
+           listSound.Add(barkSound);
+           
+        }
+
+        public List<BarkSound> getAllowedSound()
+        {
+            return listSound;
         }
     }
 }

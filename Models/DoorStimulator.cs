@@ -9,22 +9,32 @@ namespace DoorOpenCloseApp.Models
    public class DoorStimulator
     {
         Remote remote;
+        BarkRecoganizer barkRecoganizer;
         public DoorStimulator() 
-        {
+        { 
+           
             DogDoor dogDoor = new DogDoor();//constructor insid onlu assign
+            dogDoor.AddBarkSound(new BarkSound("rowlf"));
+            dogDoor.AddBarkSound(new BarkSound("rooowlf"));
+            dogDoor.AddBarkSound(new BarkSound("roowlf"));
+            dogDoor.AddBarkSound(new BarkSound("rawlf"));
+            dogDoor.AddBarkSound(new BarkSound("woofl"));
+             remote = new Remote(dogDoor);
+             barkRecoganizer = new BarkRecoganizer(dogDoor);
 
-           remote = new Remote(dogDoor);
         }
        
         public void Run()
         {
-            Console.WriteLine("Fido Dog barks bow bow");
-            remote.RemoteClicked();
+            string feedback = "";
+          
+            Console.WriteLine("Fido Dog barks Rowlf");
 
-            Console.WriteLine("Fido Dog goes outside ");
+            barkRecoganizer.DogBark("rowlf",out feedback);
+            Console.WriteLine(feedback);
+            //remote.RemoteClicked();
             Console.WriteLine("\nFido Dog has gone outside...");
-
-
+           
 
             try
             {
@@ -34,12 +44,18 @@ namespace DoorOpenCloseApp.Models
             {
                 Console.WriteLine(e.Message);
             }
+            Console.WriteLine("======================================================");
 
-            Console.WriteLine("...but he's in outside!");
 
-            Console.WriteLine("\nFido dog starts barking...");
-             Console.WriteLine("...so Gina grabs the remote control.");
-            remote.RemoteClicked();
+            Console.WriteLine("\nNeighbour dog starts barking...");
+            barkRecoganizer.DogBark("bow bow", out feedback);
+            Console.WriteLine(feedback);
+            //remote.RemoteClicked();
+            Console.WriteLine("========================================================");
+            Console.WriteLine("FIdo bark Rowlf");
+
+            barkRecoganizer.DogBark("woofl", out feedback);
+            Console.WriteLine(feedback);
 
             Console.WriteLine("\nFido's back inside...");
 
@@ -51,9 +67,13 @@ namespace DoorOpenCloseApp.Models
             {
                 Console.WriteLine(e.Message);
             }
-
-
+            Console.WriteLine("========================================================");
+            Console.WriteLine("\nNeighbour dog starts barking...");
+            barkRecoganizer.DogBark("bowosss",out feedback);
+            Console.WriteLine(feedback);
+            Console.WriteLine("========================================================");
         }
 
+      
     }
 }
