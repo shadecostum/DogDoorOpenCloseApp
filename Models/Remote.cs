@@ -24,7 +24,7 @@ namespace DoorOpenCloseApp.Models
             if (dogDoor.IsDoorOpenClose())
             {
                 dogDoor.DoorClose();
-                Console.WriteLine("close");
+                Console.WriteLine("Door closed");
 
             }
             else
@@ -33,7 +33,7 @@ namespace DoorOpenCloseApp.Models
                 Console.WriteLine("opening the door");
                 dogDoor.DoorOpen();
                
-                Timer timer = new Timer(_ =>
+                Timer timer = new Timer(_=>
                 {
                     dogDoor.DoorClose();
                     Console.WriteLine("closed after 5 sec automatically");
